@@ -115,7 +115,7 @@ def getSeason(season_id):
         except Exception as e:
             print(f"Skipping {match['matchId']}: {e}")
             
-    clean_and_save(all_events, 'seasonEvents25.csv')
+    clean_and_save(all_events, 'data/seasonEvents25.csv')
 
 def getUmichGame(season_id):
     """Retrieves all events (Both Teams) for only Michigan matches."""
@@ -132,7 +132,7 @@ def getUmichGame(season_id):
             except Exception as e:
                 print(f"Error on Match {match['matchId']}: {e}")
                 
-    clean_and_save(umich_events, 'umichGameEvents25.csv')
+    clean_and_save(umich_events, 'data/umichGameEvents25.csv')
 
 def getUmichOnly(season_id):
     """Retrieves only Michigan player events from Michigan matches."""
@@ -154,4 +154,4 @@ def getUmichOnly(season_id):
         df['team_name'] = df['team'].apply(lambda x: x.get('name') if isinstance(x, dict) else x)
         df = df[df['team_name'].str.contains("Michigan Wolverines", na=False)]
         
-        clean_and_save(df.to_dict('records'), 'umichOnlyEvents25.csv')
+        clean_and_save(df.to_dict('records'), 'data/umichOnlyEvents25.csv')
